@@ -6,20 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    protected $connection = 'pgsql';
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->string('label');
-            $table->float('price');
-            $table->text('description');
-            $table->string('image');
+        if (!Schema::hasTable('products'))
+            Schema::create('products', function (Blueprint $table) {
+                $table->id();
+                $table->string('label');
+                $table->float('price');
+                $table->text('description');
+                $table->string('image');
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
     }
 
     /**
@@ -27,6 +30,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop('products');
+        if (Schema::hasTable('products'))
+            Schema::drop('products');
     }
 };
