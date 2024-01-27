@@ -22,10 +22,6 @@ class ProductFactory extends Factory
             'description' => fake()->numberBetween(0, 2000),
             'image' => fake()->imageUrl(640, 480, 'animals', true),
 
-
-
-
-
         ];
     }
 }
