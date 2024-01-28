@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
  */
 class ProductFactory extends Factory
 {
@@ -17,11 +17,10 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'price' => fake()->numberBetween(0, 2000),
-            'description' => fake()->numberBetween(0, 2000),
-            'image' => fake()->imageUrl(640, 480, 'animals', true),
-
+            'label' => fake()->name(),
+            'description' => fake()->text(),
+            'price' => fake()->numberBetween(1, 1000),
+            'sku' => fake()->unique()->firstNameMale(),
         ];
     }
 }
