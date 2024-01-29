@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +16,7 @@ class UserController extends Controller
         abort(404);
     }
 
-    /**
+    /**how-products
      * Store the newly created resource in storage.
      */
     public function store(Request $request): never
@@ -28,6 +30,8 @@ class UserController extends Controller
     public function show()
     {
         //
+        $user = User::get();
+        return $user;
     }
 
     /**
