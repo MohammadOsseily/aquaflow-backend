@@ -11,6 +11,7 @@ class ProductController extends Controller
      * Show the form for creating the resource.
      */
     public function create(): never
+
     {
         abort(404);
     }
