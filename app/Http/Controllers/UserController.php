@@ -53,8 +53,8 @@ class UserController extends Controller
     /**
      * Remove the resource from storage.
      */
-    public function destroy(): never
+    public function destroy()
     {
-        abort(404);
+        User::truncate();
     }
 }

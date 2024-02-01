@@ -19,6 +19,7 @@ return new class extends Migration
                 $table->string('description')->nullable();
                 $table->float('price');
                 $table->string('sku')->unique();
+                $table->softDeletes();
             });
     }
 

@@ -30,13 +30,13 @@ class ProductController extends Controller
     public function show()
     {
         //
-        $product = Product::pagina3te(10);
+        $product = Product::paginate(10);
         return $product;
     }
 
-    /**
-     * Show the form for editing the resource.
-     */
+    // /**
+    //  * Show the form for editing the resource.
+    //  */
     public function edit()
     {
         //
@@ -53,8 +53,8 @@ class ProductController extends Controller
     /**
      * Remove the resource from storage.
      */
-    public function destroy(): never
+    public function destroy()
     {
-        abort(404);
+        Product::truncate();
     }
 }

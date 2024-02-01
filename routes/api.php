@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::get("/show-user", [\App\Http\Controllers\UserController::class, "show"]);
 
 Route::get("/show-product", [\App\Http\Controllers\ProductController::class, "show"]);
+Route::get("/delete-product", [\App\Http\Controllers\ProductController::class, "destroy"]);
