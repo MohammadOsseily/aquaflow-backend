@@ -10,10 +10,9 @@ class ProductController extends Controller
     /**
      * Show the form for creating the resource.
      */
-    public function create(): never
+    public function create()
 
     {
-        abort(404);
     }
 
     /**
@@ -47,7 +46,12 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $student = Product::find($request->input('id'));
+        $student->label = $request->input('label');
+        $student->description = $request->input('description');
+        $student->price = $request->input('price');
+        $student->sku = $request->input('sku');
+        $student->update();
     }
 
     /**
