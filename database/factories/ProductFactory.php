@@ -40,6 +40,8 @@ class ProductFactory extends Factory
 
 
         return [
+
+
             'label' => fake()->name(),
             'description' => fake()->text(),
             'price' => fake()->numberBetween(1, 1000),
