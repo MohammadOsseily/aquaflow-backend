@@ -46,12 +46,12 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
-        $student = Product::find($request->input('id'));
-        $student->label = $request->input('label');
-        $student->description = $request->input('description');
-        $student->price = $request->input('price');
-        $student->sku = $request->input('sku');
-        $student->update();
+        $product = Product::find($request->input('id'));
+        $product->label = $request->input('label');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->sku = $request->input('sku');
+        $product->update();
     }
 
     /**
