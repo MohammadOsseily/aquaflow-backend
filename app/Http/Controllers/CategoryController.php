@@ -44,6 +44,8 @@ class CategoryController extends Controller
     /**
      * Update the resource in storage.
      */
+
+
     public function update(Request $request)
     {
         $categorie = Category::find($request->input('id'));
