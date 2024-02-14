@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Category extends Model
 {
     use HasFactory;
+
     public function products(): MorphToMany
     {
         return $this->morphToMany(Product::class, 'linkedCategory');

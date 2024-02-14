@@ -16,7 +16,7 @@ class UserController extends Controller
         abort(404);
     }
 
-    /**how-products
+    /**how-users
      * Store the newly created resource in storage.
      */
     public function store(Request $request): never
@@ -47,7 +47,11 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $user = user::find($request->input('id'));
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->update();
     }
 
     /**

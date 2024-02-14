@@ -19,6 +19,7 @@ class Product extends Model
     protected $casts = [
         'gallery' => 'array',
     ];
+
     public function categorys(): MorphToMany
     {
         return $this->morphToMany(Category::class, 'linkedCategory');
