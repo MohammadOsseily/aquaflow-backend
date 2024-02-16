@@ -15,12 +15,12 @@ return new class extends Migration
             Schema::create('products', function (Blueprint $table) {
                 $table->uuid('id');
                 $table->timestamps();
+                $table->json('categories')->default('{}');
                 $table->string('label');
                 $table->string('description')->nullable();
                 $table->float('price');
                 $table->string('sku')->unique();
                 $table->json('gallery')->default('{}');
-                $table->string("categories");
                 $table->softDeletes();
             });
     }

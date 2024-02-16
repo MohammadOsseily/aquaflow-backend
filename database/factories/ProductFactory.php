@@ -32,9 +32,14 @@ class ProductFactory extends Factory
             'https://m.media-amazon.com/images/I/71nDK2Q8HAL._AC_UL640_QL65_.jpg'
         ]);
 
-        $randomImages = $randomImages->map(function ($image) {
-            return rand(0, 1) ? $image : null;
-        });
+        $images = [];
+
+        for ($i = 0; $i < $randomImages->count(); $i++) {
+
+            if (rand(0, 1)) {
+                $images[] = $randomImages[$i];
+            }
+        }
 
 
 

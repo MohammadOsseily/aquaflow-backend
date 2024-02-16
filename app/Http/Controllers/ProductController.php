@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,7 @@ class ProductController extends Controller
     public function show()
     {
         //
-        $product = Product::paginate(10);
+        $product = Product::with(Category::class)->paginate(10);
         return $product;
     }
 
@@ -51,6 +52,7 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->sku = $request->input('sku');
+        $product->gallery = $request->input('gallery');
         $product->update();
     }
 

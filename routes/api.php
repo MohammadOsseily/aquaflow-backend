@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('user')->group(function () {
 
-    Route::post("/view", [\App\Http\Controllers\UserController::class, "show"]);
+    Route::post("/show", [\App\Http\Controllers\UserController::class, "show"]);
 });
 
 Route::prefix('product')->group(function () {
 
-    Route::post("/view", [\App\Http\Controllers\ProductController::class, "show"]);
+    Route::post("/show", [\App\Http\Controllers\ProductController::class, "show"]);
     Route::post("/delete", [\App\Http\Controllers\ProductController::class, "destroy"]);
     Route::post('/update', [\App\Http\Controllers\ProductController::class, 'update']);
 });
