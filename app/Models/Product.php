@@ -52,13 +52,12 @@ class Product extends Model
     protected $keyType = 'string';
 
     protected $casts = [
-        'gallery' => 'array',
-        'categories' => 'array'
+        'gallery' => 'array'
     ];
-    protected $fillable = ["categories"];
 
-    public function categories(): BelongsToMany
+
+    public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'categories_products', 'products_id', 'categories_id');
     }
 }

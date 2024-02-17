@@ -15,7 +15,6 @@ return new class extends Migration
             Schema::create('products', function (Blueprint $table) {
                 $table->uuid('id');
                 $table->timestamps();
-                $table->json('categories')->default('{}');
                 $table->string('label');
                 $table->string('description')->nullable();
                 $table->float('price');

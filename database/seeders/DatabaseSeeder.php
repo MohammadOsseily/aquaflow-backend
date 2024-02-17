@@ -15,17 +15,17 @@ class DatabaseSeeder extends Seeder
     {
         CategorySeeder::run();
         ProductSeeder::run();
-        $products = Product::all();
-        $categories = Category::pluck("id")->toArray();
-        foreach ($products as $product) {
-            $categoriesRndKey = array_rand($categories, count($categories));
-            $categoriesValues = [];
-            foreach ($categoriesRndKey as $key) {
-                $categoriesValues = $categories[$key];
-            }
-            $product->categories()->sync($categoriesValues);
-            $product->save();
-        }
+        // $products = Product::all();
+        // $categories = Category::pluck("id")->toArray();
+        // foreach ($products as $product) {
+        //     $categoriesRndKey = array_rand($categories, count($categories));
+        //     $categoriesValues = [];
+        //     foreach ($categoriesRndKey as $key) {
+        //         $categoriesValues = $categories[$key];
+        //     }
+        //     $product->categories()->sync($categoriesValues);
+        //     $product->save();
+        // }
         UserSeeder::run();
     }
 }

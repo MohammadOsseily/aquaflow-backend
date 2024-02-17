@@ -29,8 +29,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Category extends Model
 {
     use HasFactory;
-    function products(): BelongsToMany
+    public function products()
     {
-        return $this->belongsToMany(Product::class, null);
+        return $this->belongsToMany(Product::class, 'categories_products', 'categories_id', 'products_id');
     }
 }

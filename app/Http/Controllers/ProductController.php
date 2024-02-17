@@ -30,7 +30,7 @@ class ProductController extends Controller
     public function show()
     {
         //
-        $product = Product::with(Category::class)->paginate(10);
+        $product = Product::paginate(10);
         return $product;
     }
 

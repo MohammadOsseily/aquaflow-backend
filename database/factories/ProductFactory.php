@@ -51,7 +51,7 @@ class ProductFactory extends Factory
             'price' => fake()->numberBetween(1, 1000),
             'sku' => fake()->unique()->firstNameMale(),
             'gallery' => $randomImages,
-            'categories' => fake()->text()
+
         ];
     }
 }
