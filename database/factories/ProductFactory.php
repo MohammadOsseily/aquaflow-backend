@@ -50,7 +50,7 @@ class ProductFactory extends Factory
             'description' => fake()->text(),
             'price' => fake()->numberBetween(1, 1000),
             'sku' => fake()->unique()->firstNameMale(),
-            'gallery' => $randomImages,
+            'gallery' => $images,
 
         ];
     }
