@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('user')->group(function () {
 
     Route::post("/show", [\App\Http\Controllers\UserController::class, "show"]);
+    Route::post("/checkExist", [\App\Http\Controllers\UserController::class, "checkExist"]);
 });
 
 Route::prefix('product')->group(function () {

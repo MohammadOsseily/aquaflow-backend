@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use Hash;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
+
+use function Laravel\Prompts\alert;
 
 class UserController extends Controller
 {
@@ -53,6 +57,37 @@ class UserController extends Controller
         $user->password = $request->input('password');
         $user->update();
     }
+    public function checkExist(Request $request)
+    {
+        $user = User::where("email", $request->input('email'))->first();
+
+        if (isset($user)) {
+
+            return $user;
+        } else {
+
+            return false;
+        }
+    }
+    public function login(Request $request)
+    {
+        $user = $this->checkExist($request);
+        if (isset($user)) {
+
+            if ($user->password ==  Hash::make($request->input('password'))) {
+            }
+        } else {
+
+            alert("the email or password doesn't exist.");
+        }
+    }
+    public function register(Request $request)
+    {
+        $input['email'] = User::find($request->input('email'));
+
+        $rules = array('email' => 'unique:users,email');
+    }
+
 
     /**
      * Remove the resource from storage.
