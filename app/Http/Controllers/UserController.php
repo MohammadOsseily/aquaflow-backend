@@ -83,9 +83,20 @@ class UserController extends Controller
     }
     public function register(Request $request)
     {
-        $input['email'] = User::find($request->input('email'));
+        $userCheck = $this->checkExist($request);
+        $user = new User;
 
-        $rules = array('email' => 'unique:users,email');
+        if (isset($userCheck)) {
+
+            alert("The email allready exists.");
+        } else {
+
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = $request->input('password');
+
+            $user->save();
+        }
     }
 
 
