@@ -71,10 +71,12 @@ class UserController extends Controller
     }
     public function login(Request $request)
     {
+        $login = false;
         $user = $this->checkExist($request);
         if (isset($user)) {
 
             if ($user->password ==  Hash::make($request->input('password'))) {
+                return $login = true;
             }
         } else {
 
