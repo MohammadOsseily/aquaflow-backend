@@ -6,7 +6,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\PersonalAccessToken;
+use Symfony\Component\HttpFoundation\Response;
 
 use function Laravel\Prompts\alert;
 
@@ -69,38 +73,55 @@ class UserController extends Controller
             return false;
         }
     }
-    public function login(Request $request)
-    {
-        $login = false;
-        $user = $this->checkExist($request);
-        if (isset($user)) {
 
-            if ($user->password ==  Hash::make($request->input('password'))) {
-                return $login = true;
-            }
-        } else {
-
-            alert("the email or password doesn't exist.");
-        }
-    }
     public function register(Request $request)
     {
-        $userCheck = $this->checkExist($request);
-        $user = new User;
+        $fields = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
+        ]);
 
-        if (isset($userCheck)) {
+        $user = User::create([
+            'name' => $fields['name'],
+            'email' => $fields['email'],
+            'password' => Hash::make($fields['password']),
 
-            alert("The email allready exists.");
-        } else {
+        ]);
 
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $user->password = $request->input('password');
-
-            $user->save();
-        }
+        $response = [
+            'success' => true,
+            'message' => "Registration successful."
+        ];
+        return response()->json($response, 201);
     }
 
+    public function login(Request $request)
+    {
+
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (!$user || !Hash::check($credentials['password'], $user->password)) {
+
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+
+        $token = $user->createToken('authToken')->plainTextToken;
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+            'access_token' => $token,
+            'message' => 'Login successful',
+        ], Response::HTTP_OK);
+    }
 
     /**
      * Remove the resource from storage.
