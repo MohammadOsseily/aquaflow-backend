@@ -61,18 +61,7 @@ class UserController extends Controller
         $user->password = $request->input('password');
         $user->update();
     }
-    public function checkExist(Request $request)
-    {
-        $user = User::where("email", $request->input('email'))->first();
 
-        if (isset($user)) {
-
-            return $user;
-        } else {
-
-            return false;
-        }
-    }
 
     public function register(Request $request)
     {
