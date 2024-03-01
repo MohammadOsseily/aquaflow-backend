@@ -94,6 +94,7 @@ class UserController extends Controller
         ]);
 
         $user = User::where('email', $credentials['email'])->first();
+        return $user;
 
         if (!$user || !Hash::check($credentials['password'], $user->password)) {
 
@@ -104,12 +105,13 @@ class UserController extends Controller
 
         $token = $user->createToken('authToken')->plainTextToken;
 
-        return response()->json([
-            'success' => true,
-            'user' => $user,
-            'access_token' => $token,
-            'message' => 'Login successful',
-        ], Response::HTTP_OK);
+        // return response()->json([
+        //     'success' => true,
+        //     'user' => $user,
+        //     'access_token' => $token,
+        //     'message' => 'Login successful',
+        // ], Response::HTTP_OK);
+
     }
 
     /**
