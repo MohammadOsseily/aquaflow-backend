@@ -2,30 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\Product;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Seed the application's database.
      */
     public function run(): void
     {
-        CategorySeeder::run();
-        ProductSeeder::run();
-        // $products = Product::all();
-        // $categories = Category::pluck("id")->toArray();
-        // foreach ($products as $product) {
-        //     $categoriesRndKey = array_rand($categories, count($categories));
-        //     $categoriesValues = [];
-        //     foreach ($categoriesRndKey as $key) {
-        //         $categoriesValues = $categories[$key];
-        //     }
-        //     $product->categories()->sync($categoriesValues);
-        //     $product->save();
-        // }
-        UserSeeder::run();
+        // \App\Models\User::factory(10)->create();
+
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
     }
 }
