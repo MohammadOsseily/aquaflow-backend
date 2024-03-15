@@ -10,6 +10,7 @@ class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
      */
     public static function run(): void
     {
