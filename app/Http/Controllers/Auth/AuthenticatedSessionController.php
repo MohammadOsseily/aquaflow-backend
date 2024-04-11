@@ -8,18 +8,37 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
+
 class AuthenticatedSessionController extends Controller
 {
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): Response
+    public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        $credentials = $request->only('email', 'password');
 
-        $request->session()->regenerate();
+        if (Auth::attempt($credentials)) {
+            // Authentication successful
+            $user = Auth::user();
 
-        return response()->noContent();
+            // You can access additional fields from the user model if needed
+            $name = $user->name;
+            $email = $user->email;
+
+            // Create API token (if using Sanctum)
+            $token = $user->createToken('Personal Access Token')->plainTextToken;
+
+            return response()->json([
+                'message' => 'Authentication successful',
+                'token' => $token,
+                'name' => $name, // Additional fields
+                'email' => $email, // Additional fields
+            ], 200);
+        }
+
+        // Authentication failed
+        return response()->json(['message' => 'Invalid credentials'], 401);
     }
 
     /**

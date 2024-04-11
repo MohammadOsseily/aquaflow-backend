@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,3 +29,9 @@ Route::prefix('product')->group(function () {
     Route::post("/delete", [\App\Http\Controllers\ProductController::class, "destroy"]);
     Route::post('/update', [\App\Http\Controllers\ProductController::class, 'update']);
 });
+
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
+
+
+Route::post('/register', [RegisteredUserController::class, 'store']);
