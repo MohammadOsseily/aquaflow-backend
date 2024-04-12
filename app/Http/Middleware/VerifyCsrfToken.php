@@ -9,9 +9,10 @@ class VerifyCsrfToken extends Middleware
     /**
      * The URIs that should be excluded from CSRF verification.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $except = [
-        '*',
+        // Add URLs or route names here
+        'api/*', // Example: Exclude all routes starting with /api
     ];
 }
