@@ -34,5 +34,5 @@ Route::prefix('product')->group(function () {
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
 
 
-Route::get('/register', [RegisteredUserController::class, 'store']);
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 // routes/api.php
