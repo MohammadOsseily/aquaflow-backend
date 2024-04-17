@@ -18,6 +18,7 @@ return new class extends Migration
                 $table->string('label');
                 $table->string('description')->nullable();
                 $table->float('price');
+                $table->float('quantity');
                 $table->string('sku')->unique();
                 $table->json('gallery')->default('{}');
                 $table->softDeletes();

@@ -49,6 +49,7 @@ class ProductFactory extends Factory
             'label' => fake()->name(),
             'description' => fake()->text(),
             'price' => fake()->numberBetween(1, 1000),
+            'quantity' => fake()->numberBetween(1, 100),
             'sku' => fake()->unique()->firstNameMale(),
             'gallery' => $images,
 
