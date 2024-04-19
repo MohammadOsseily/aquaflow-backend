@@ -31,6 +31,6 @@ class Category extends Model
     use HasFactory;
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'categories_products', 'categories_id', 'products_id');
+        return $this->belongsToMany(Product::class, 'product_categories');
     }
 }

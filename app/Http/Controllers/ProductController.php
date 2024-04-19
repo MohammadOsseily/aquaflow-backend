@@ -41,6 +41,12 @@ class ProductController extends Controller
     {
         //
     }
+    public function productCategories(Request $request)
+    {
+
+        $category = Category::find(1)->products;
+        dd($category);
+    }
 
     /**
      * Update the resource in storage.

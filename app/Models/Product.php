@@ -47,7 +47,7 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use HasUuids;
+
 
     protected $keyType = 'string';
 
@@ -58,6 +58,6 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'categories_products', 'products_id', 'categories_id');
+        return $this->belongsToMany(Category::class, 'product_categories');
     }
 }

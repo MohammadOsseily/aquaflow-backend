@@ -13,12 +13,12 @@ return new class extends Migration
     {
         if (!Schema::hasTable('products'))
             Schema::create('products', function (Blueprint $table) {
-                $table->uuid('id');
+                $table->id('id');
                 $table->timestamps();
                 $table->string('label');
                 $table->string('description')->nullable();
                 $table->float('price');
-                $table->float('quantity');
+                $table->float('stocks');
                 $table->string('sku')->unique();
                 $table->json('gallery')->default('{}');
                 $table->softDeletes();

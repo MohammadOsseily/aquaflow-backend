@@ -13,20 +13,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('categories_products')) {
-            Schema::create('categories_products', function (Blueprint $table) {
+        if (!Schema::hasTable('product_categories')) {
+            Schema::create('product_categories', function (Blueprint $table) {
                 $table->id();
-                $table->integer('products_id')->unsigned();
-                $table->integer('categories_id')->unsigned();
+                $table->integer('product_id')->unsigned();
+                $table->integer('category_id')->unsigned();
 
+                $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+                $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
 
                 $table->timestamps();
             });
-            Schema::table('categories_products', function ($table) {
-                $table->foreign('products_id')->references('id')->on('products')->onDelete('cascade');
-                $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
-            });
+            // Schema::table('categories_products', function ($table) {
+            //     $table->foreign('products_id')->nullable()->references('id')->on('products')->onDelete('cascade');
+            //     $table->foreign('categories_id')->nullable()->references('id')->on('categories')->onDelete('cascade');
+            // });
         }
     }
 
@@ -35,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories_products');
+        Schema::dropIfExists('product_categories');
     }
 };
