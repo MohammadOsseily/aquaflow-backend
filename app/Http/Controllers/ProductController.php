@@ -26,6 +26,7 @@ class ProductController extends Controller
 
     /**
      * Display the resource.
+     *
      */
     public function show()
     {
