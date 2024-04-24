@@ -21,6 +21,7 @@ Route::prefix('user')->group(function () {
     Route::post("/checkexist", [\App\Http\Controllers\UserController::class, "checkExist"]);
     Route::post("/register", [\App\Http\Controllers\UserController::class, "register"]);
     Route::post("/login", [\App\Http\Controllers\UserController::class, "login"]);
+    Route::post("/showcart", [\App\Http\Controllers\UserController::class, "cart"]);
 });
 
 Route::prefix('product')->group(function () {

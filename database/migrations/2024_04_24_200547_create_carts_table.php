@@ -14,10 +14,7 @@ return new class extends Migration
         if (!Schema::hasTable('carts')) {
             Schema::create('carts', function (Blueprint $table) {
                 $table->id();
-                $table->unsignedBigInteger('user_id')->index();
                 $table->timestamps();
-
-                $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             });
         }
     }

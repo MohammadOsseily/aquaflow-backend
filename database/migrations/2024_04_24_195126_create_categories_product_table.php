@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,11 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('cart_product')) {
-
-            Schema::create('cart_product', function (Blueprint $table) {
+        if (!Schema::hasTable('categories_product')) {
+            Schema::create('categories_product', function (Blueprint $table) {
                 $table->id();
-                $table->float('quantity');
+                $table->foreignId('product_id')->constrained();
+                $table->foreignId('category_id')->constrained();
                 $table->timestamps();
             });
         }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cart_product');
+        Schema::dropIfExists('categories_product');
     }
 };

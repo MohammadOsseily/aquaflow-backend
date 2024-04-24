@@ -109,6 +109,10 @@ class UserController extends Controller
     /**
      * Remove the resource from storage.
      */
+    public function showcart()
+    {
+        $cart = User::find(1)->cart;
+    }
     public function destroy()
     {
         User::truncate();
