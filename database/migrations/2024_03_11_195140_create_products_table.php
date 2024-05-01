@@ -17,8 +17,8 @@ return new class extends Migration
                 $table->timestamps();
                 $table->string('label');
                 $table->string('description')->nullable();
-                $table->float('price');
-                $table->float('stocks');
+                $table->unsignedFloat('price');
+                $table->unsignedInteger('stock');
                 $table->string('sku')->unique();
                 $table->json('gallery')->default('{}');
                 $table->softDeletes();

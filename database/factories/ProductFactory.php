@@ -49,7 +49,7 @@ class ProductFactory extends Factory
             'label' => fake()->name(),
             'description' => fake()->text(),
             'price' => fake()->numberBetween(1, 1000),
-            'stocks' => fake()->numberBetween(1, 100),
+            'stock' => fake()->numberBetween(1, 100),
             'sku' => fake()->unique()->firstNameMale(),
             'gallery' => $images,
 

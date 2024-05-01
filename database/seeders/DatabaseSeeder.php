@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,6 +28,16 @@ class DatabaseSeeder extends Seeder
         //     $product->categories()->sync($categoriesValues);
         //     $product->save();
         // }
+
         UserSeeder::run();
+
+        CartSeeder::run();
+
+        $carts = Cart::all()->toArray();
+        $users = User::all();
+
+        foreach ($users as $id => $user) {
+            $user->cart()->associate($carts[$id]);
+        }
     }
 }
