@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
         //     }
         //     $product->categories()->sync($categoriesValues);
         //     $product->save();
-
         // }
 
         UserSeeder::run();
