@@ -14,6 +14,7 @@ class CartSeeder extends Seeder
     public static function run(): void
     {
         //
+        $n = 0;
         Cart::factory()->count(10)->create();
     }
 }

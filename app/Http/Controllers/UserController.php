@@ -38,8 +38,8 @@ class UserController extends Controller
     public function show()
     {
         //
-        $user = User::get();
-        return $user;
+        $userIds = User::pluck('id')->toArray();
+        return $userIds;
     }
 
     /**
@@ -109,6 +109,13 @@ class UserController extends Controller
     /**
      * Remove the resource from storage.
      */
+    public function getUser()
+    {
+
+        $user = User::get();
+        return $user->pluck('id');
+    }
+
     public function showcart()
     {
         $cart = User::find(1)->cart;

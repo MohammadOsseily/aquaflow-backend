@@ -17,9 +17,17 @@ class CartFactory extends Factory
      */
     public function definition(): array
     {
+        $userIds = User::pluck('id')->toArray();
+        $numberOfCarts = count($userIds);
+
+        // Calculate the index of the current cart based on the number of created carts
+        $currentCartIndex = $this->faker->unique()->numberBetween(0, $numberOfCarts - 1);
+
+        // Get the user ID corresponding to the current cart index
+        $userId = $userIds[$currentCartIndex];
+
         return [
-            //
-            'user_id' => User::all()->random()->id,
+            'user_id' => $userId,
         ];
     }
 }

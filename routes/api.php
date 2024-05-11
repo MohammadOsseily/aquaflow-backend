@@ -18,6 +18,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 
 Route::prefix('user')->group(function () {
 
+    Route::post("/getUser", [\App\Http\Controllers\UserController::class, "getUser"]);
     Route::post("/show", [\App\Http\Controllers\UserController::class, "show"]);
     Route::post("/checkexist", [\App\Http\Controllers\UserController::class, "checkExist"]);
     Route::post("/register", [\App\Http\Controllers\UserController::class, "register"]);
