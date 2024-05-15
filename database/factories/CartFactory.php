@@ -13,7 +13,7 @@ class CartFactory extends Factory
     /**
      * Define the model's default state.
      *
-     *
+     *1
      * @return array<string, mixed>
      */
     public function definition(): array
