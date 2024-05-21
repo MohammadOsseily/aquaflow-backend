@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use DB;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -47,6 +48,21 @@ class ProductController extends Controller
         $category = Category::find(1)->products;
         dd($category);
     }
+    public function createproduct(Request $request)
+    {
+        $validatedData = $request->validate([
+            'label' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'sku' => 'required|string|unique:products,sku',
+        ]);
+
+        $product = Product::create($validatedData);
+
+        return response()->json($product, 201);
+    }
+
 
     /**
      * Update the resource in storage.
@@ -58,9 +74,54 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->sku = $request->input('sku');
-        $product->gallery = $request->input('gallery');
+        $product->image = $request->input('image');
         $product->update();
     }
+    public function updateproduct(Request $request, $id)
+    {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        $validatedData = $request->validate([
+            'label' => 'string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'numeric|min:0',
+            'stock' => 'integer|min:0',
+            'sku' => 'unique:products,sku,' . $product->id, // Exclude current product ID from unique validation
+            'image' => 'string',
+        ]);
+
+        $product->update($validatedData);
+
+        return response()->json($product);
+    }
+
+    public function getproduct($id)
+    {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        return response()->json($product);
+    }
+
+
+    public function deleteproduct($id)
+    {
+        Product::where("id", $id)->delete();
+
+        // DB::table('products')->where('id', $id)->delete();
+
+
+        return response()->json(['message' => 'Product deleted successfully']);
+    }
+
+
 
     /**
      * Remove the resource from storage.

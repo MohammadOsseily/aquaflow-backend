@@ -28,6 +28,11 @@ Route::prefix('user')->group(function () {
 
 Route::prefix('product')->group(function () {
 
+    Route::post("/get/{id}", [\App\Http\Controllers\ProductController::class, "getproduct"]);
+    Route::post("/delete/{id}", [\App\Http\Controllers\ProductController::class, "deleteproduct"]);
+    Route::post("/edit/{id}", [\App\Http\Controllers\ProductController::class, "updateproduct"]);
+    Route::post("/create", [\App\Http\Controllers\ProductController::class, "createproduct"]);
+
     Route::post("/productcat", [\App\Http\Controllers\ProductController::class, "productCategories"]);
     Route::post("/show", [\App\Http\Controllers\ProductController::class, "show"]);
     Route::post("/delete", [\App\Http\Controllers\ProductController::class, "destroy"]);

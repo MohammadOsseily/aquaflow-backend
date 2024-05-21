@@ -37,7 +37,7 @@ class ProductFactory extends Factory
         for ($i = 0; $i < $randomImages->count(); $i++) {
 
             if (rand(0, 1)) {
-                $images[] = $randomImages[$i];
+                $images = $randomImages[$i];
             }
         }
 
@@ -51,7 +51,7 @@ class ProductFactory extends Factory
             'price' => fake()->numberBetween(1, 1000),
             'stock' => fake()->numberBetween(1, 100),
             'sku' => fake()->unique()->firstNameMale(),
-            'gallery' => $images,
+            'image' => $images,
 
         ];
     }
