@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +47,10 @@ Route::post('/login', [UserController::class, 'login']);
 
 
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
+// routes/api.php
+
+Route::post('/cart/add', [CartController::class, 'addToCart']);
+Route::post('/cart', [CartController::class, 'getCart']);
+Route::post('/cart/update', [CartController::class, 'updateCartItem']);
+Route::post('/cart/remove', [CartController::class, 'removeCartItem']);
 // routes/api.php

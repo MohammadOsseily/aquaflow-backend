@@ -69,6 +69,7 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
             $token = $user->createToken('authToken')->plainTextToken;
 
             $user = json_encode([
