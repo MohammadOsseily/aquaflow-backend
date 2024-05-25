@@ -71,7 +71,7 @@ class UserController extends Controller
             $user = Auth::user();
             $token = $user->createToken('authToken')->plainTextToken;
 
-            return response()->json([
+            $user = json_encode([
                 'token' => $token,
                 'user' => [
                     'id' => $user->id,
@@ -81,6 +81,7 @@ class UserController extends Controller
                     'vendor' => $user->vendor,
                 ]
             ]);
+            return response($user);
         }
 
         return response()->json(['error' => 'Invalid credentials'], 401);
