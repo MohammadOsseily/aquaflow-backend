@@ -20,7 +20,7 @@ return new class extends Migration
                 $table->unsignedFloat('price');
                 $table->unsignedInteger('stock');
                 $table->string('sku')->unique();
-                $table->text('image');
+                $table->text('image')->nullable();
                 $table->softDeletes();
             });
     }

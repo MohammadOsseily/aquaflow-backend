@@ -31,7 +31,7 @@ class ProductController extends Controller
     public function show()
     {
         //
-        $product = Product::paginate(10);
+        $product = Product::paginate(23);
         return $product;
     }
 
