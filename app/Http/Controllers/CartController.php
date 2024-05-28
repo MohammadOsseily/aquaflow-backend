@@ -28,7 +28,7 @@ class CartController extends Controller
                 $quantity = $request->input('quantity');
 
                 // Get or create a cart for the user
-                $cart = Cart::firstOrCreate(['user_id' => $user->id]);
+                $cart = Cart::firstOrCreate(['user_id' => $user->id, "purchased" => 0]);
 
                 // Check if the item is already in the cart
                 $cartItem = Cart_Item::where('cart_id', $cart->id)
@@ -63,7 +63,7 @@ class CartController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            $cart = Cart::where('user_id', $user->id)->first();
+            $cart = Cart::where('user_id', $user->id)->where('purchased', 0)->first();
             $cartItems = Cart_Item::where('cart_id', $cart->id)->get();
             $cartItemsIds = $cartItems->pluck("product_id");
             $product = Product::whereIn('id', $cartItemsIds)->get();

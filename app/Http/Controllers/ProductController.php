@@ -34,6 +34,13 @@ class ProductController extends Controller
         $product = Product::paginate(23);
         return $product;
     }
+    public function search($term)
+    {
+        //
+        $product = Product::where('label', 'LIKE', '%' . $term . '%')->paginate(23);
+        return $product;
+    }
+
 
     // /**
     //  * Show the form for editing the resource.

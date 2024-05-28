@@ -17,31 +17,26 @@ class OrderController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            $cart = Cart::where('user_id', $user->id)->first();
+            $cart = Cart::where('user_id', $user->id)->where('purchased', 0)->first();
+            $order  = new order();
 
 
+            $order->user_id = $user->id;
+            $order->cart_id = $cart->id;
+            $order->email = request()->input('email');
+            $order->fname = request()->input('fname');
+            $order->conutry = request()->input('conutry');
+            $order->state = request()->input('state');
+            $order->city = request()->input('city');
+            $order->apartment = request()->input('apartment');
+            $order->floor = request()->input('floor');
+            $order->additional_notes = request()->input('additional_notes');
+            $order->save();
 
+            $cart->purchased = 1;
+            $cart->save();
 
-            $array = [];
-
-
-            $array[] = [
-
-                "user_id" => $user->id,
-                "cart_id" => $cart->id,
-                "email" => request()->input('email'),
-                "fname" => request()->input('fname'),
-                "conutry" => request()->input('conutry'),
-                "state" => request()->input('state'),
-                "city" => request()->input('city'),
-                "apartment" => request()->input('apartment'),
-                "floor" => request()->input('floor'),
-                "additional_notes" => request()->input('additional_notes'),
-
-            ];
-
-
-            $order = order::create($array);
+            return response()->json(['message' => 'successfully'], 200);
         }
         return response()->json(['error' => 'Unauthorized'], 401);
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::prefix('product')->group(function () {
     Route::post("/delete/{id}", [\App\Http\Controllers\ProductController::class, "deleteproduct"]);
     Route::post("/edit/{id}", [\App\Http\Controllers\ProductController::class, "updateproduct"]);
     Route::post("/create", [\App\Http\Controllers\ProductController::class, "createproduct"]);
+    Route::get("/search/{term}", [\App\Http\Controllers\ProductController::class, "search"]);
+
 
     Route::post("/productcat", [\App\Http\Controllers\ProductController::class, "productCategories"]);
     Route::post("/show", [\App\Http\Controllers\ProductController::class, "show"]);
@@ -53,4 +56,12 @@ Route::post('/cart/add', [CartController::class, 'addToCart']);
 Route::post('/cart', [CartController::class, 'getCart']);
 Route::post('/cart/update', [CartController::class, 'updateCartItem']);
 Route::post('/cart/remove', [CartController::class, 'removeCartItem']);
+
+
+
+Route::post("/order/create", [\App\Http\Controllers\OrderController::class, "createOrder"]);
+Route::middleware('auth:sanctum')->get('/check-token', function (Request $request) {
+    return response()->json(['user' => $request->user()]);
+});
+
 // routes/api.php
