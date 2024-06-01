@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
@@ -40,6 +41,12 @@ class UserController extends Controller
     {
         //
         $userIds = User::pluck('id')->toArray();
+        return $userIds;
+    }
+    public function showUser()
+    {
+        //
+        $userIds = User::paginate(15);
         return $userIds;
     }
 
@@ -94,7 +101,15 @@ class UserController extends Controller
         $user = User::get();
         return $user->pluck('id');
     }
+    public function deleteUser($id)
+    {
+        Cart::where('user_id', $id)->delete();
+        User::where("id", $id)->delete();
 
+
+
+        return response()->json(['message' => 'User deleted successfully']);
+    }
     public function showcart()
     {
         $cart = User::find(1)->cart;

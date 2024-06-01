@@ -24,10 +24,12 @@ Route::prefix('user')->group(function () {
 
     Route::post("/getUser", [\App\Http\Controllers\UserController::class, "getUser"]);
     Route::post("/show", [\App\Http\Controllers\UserController::class, "show"]);
+    Route::post("/list", [\App\Http\Controllers\UserController::class, "showUser"]);
     Route::post("/checkexist", [\App\Http\Controllers\UserController::class, "checkExist"]);
     Route::post("/register", [\App\Http\Controllers\UserController::class, "register"]);
     Route::post("/login", [\App\Http\Controllers\UserController::class, "login"]);
     Route::post("/showcart", [\App\Http\Controllers\UserController::class, "cart"]);
+    Route::post("/delete/{id}", [\App\Http\Controllers\UserController::class, "deleteUser"]);
 });
 
 Route::prefix('product')->group(function () {
